@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Zamauddin/TerraformCICD.git'
+            }
+        }
+         stage('init') {
+            steps {
+                sh "terraform init"
+            }
+        }
+        stage('action') {
+            steps {
+                echo "Terraform action is --> ${action}"
+                sh "terraform ${action} -auto-approve"
+            }
+        }
+    }
+}
