@@ -1,0 +1,12 @@
+node {
+    stage('checkout') { 
+        git branch: 'main', url: 'https://github.com/Zamauddin/TerraformCICD.git'
+    }
+    stage('init') {
+        sh "terraform init"
+    }
+    stage('action') {
+        echo "Terraform action is --> ${action}"
+        sh "terraform ${action} -auto-approve"
+    }
+}
